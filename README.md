@@ -1,23 +1,14 @@
-# Adonis API application
+# Dizelok API
 
-This is the boilerplate for creating an API server in AdonisJs, it comes pre-configured with.
-
-1. Bodyparser
-2. Authentication
-3. CORS
-4. Lucid ORM
-5. Migrations and seeds
+This is the backend app for Dizelok Logistic CRM
 
 ## Setup
 
-Use the adonis command to install the blueprint
-
-```bash
-adonis new yardstick --api-only
+```js
+npm i -g @adonisjs/cli
+npm install
+adonis serve --dev
 ```
-
-or manually clone the repo and then run `npm install`.
-
 
 ### Migrations
 
