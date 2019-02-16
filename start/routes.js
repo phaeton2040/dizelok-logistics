@@ -18,4 +18,6 @@ const Route = use('Route')
 
 Route.get('/', 'UserController.index')
 Route.post('/login', 'UserController.login').middleware('guest')
+Route.delete('/logout', 'UserController.logout').middleware('auth')
+Route.post('/refresh-token', 'UserController.refreshToken').middleware('auth')
 Route.post('/auth-info', 'UserController.authInfo').middleware('auth')
