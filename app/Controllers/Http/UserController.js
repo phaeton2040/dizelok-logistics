@@ -8,6 +8,57 @@ class UserController {
         response.send({ success: true })
     }
 
+    async createUser({ request, response }) {
+        try {
+            const { username, email, password, firstName, lastName, role, organisation_id } = request.all();
+            const user = new User();
+
+            user.fill({ username, email, password, firstName, lastName, role, organisation_id });
+
+            await user.save();
+            response.send({ ok: true, user: { ...user.$attributes } });
+        } catch (e) {
+            response.status(400);
+            response.send({ ok: false, error: e.message })
+        }
+    }
+
+    async updateUser({ request, response }) {
+        try {
+            const attrs = request.all();
+            const user = await User.findOrFail(attrs.id);
+
+            if (!attrs.password) {
+                delete attrs.password;
+            }
+
+            delete attrs.id;
+
+            user.merge(attrs);
+
+            console.log(user.$attributes, attrs);
+            await user.save();
+            response.send({ ok: true, user: { ...user.$attributes } });
+        } catch (e) {
+            response.status(400);
+            response.send({ ok: false, error: e.message })
+        }
+    }
+
+    async getUsers({ auth, request, response }) {
+        try {
+            const currentUser = await auth.getUser();
+            const { page } = request.get();
+            const userSeries = await User.query()
+                                         .where('organisation_id', '=', currentUser.organisation_id).paginate(page, 10);
+
+            response.send({ ...userSeries.toJSON() });
+        } catch (e) {
+            response.status(400);
+            response.send({ ok: false, error: e.message })
+        }
+    }
+
     async login({ auth, request, response }) {
         const { email, password } = request.all();
 
@@ -19,10 +70,6 @@ class UserController {
             response.status(401);
             response.send(e);
         }
-    }
-
-    async create({ auth, request, response }) {
-        throw new Error('Create user action not emplemented');
     }
 
     async logout( { auth, request, response }) {
@@ -48,12 +95,14 @@ class UserController {
         }
     }
 
-    async authInfo({ auth, request, response }) {
+    async getUser({ response, params }) {
         try {
-            await auth.check();
-            response.send({ sucess: true, user: await auth.getUser()})
+            const { id } = params;
+
+            response.send({ ok: true, user: await User.findOrFail(id)})
         } catch (error) {
-            response.send({success: false})
+            response.status(404);
+            response.send({ ok: false, error: 'User with specified ID not found' })
         }
     }
 }
