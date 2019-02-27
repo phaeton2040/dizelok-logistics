@@ -36,7 +36,6 @@ class UserController {
 
             user.merge(attrs);
 
-            console.log(user.$attributes, attrs);
             await user.save();
             response.send({ ok: true, user: { ...user.$attributes } });
         } catch (e) {
@@ -100,6 +99,20 @@ class UserController {
             const { id } = params;
 
             response.send({ ok: true, user: await User.findOrFail(id)})
+        } catch (error) {
+            response.status(404);
+            response.send({ ok: false, error: 'User with specified ID not found' })
+        }
+    }
+
+    async deleteUser({ response, params }) {
+        try {
+            const { id } = params;
+            const user = await User.findOrFail(id);
+
+            await user.delete()
+            
+            response.send({ ok: true })
         } catch (error) {
             response.status(404);
             response.send({ ok: false, error: 'User with specified ID not found' })
