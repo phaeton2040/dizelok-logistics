@@ -26,3 +26,6 @@ Route.post('/users/:id', 'UserController.updateUser').middleware('auth')
 Route.delete('/users/:id', 'UserController.deleteUser').middleware('auth')
 Route.get('/users', 'UserController.getUsers').middleware('auth')
 Route.post('/users', 'UserController.createUser').middleware('auth')
+
+// Organisation routes
+Route.get('/organisation/current', 'OrganisationController.getOrganisationData').middleware('auth')
