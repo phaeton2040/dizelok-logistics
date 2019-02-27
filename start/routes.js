@@ -29,3 +29,4 @@ Route.post('/users', 'UserController.createUser').middleware('auth')
 
 // Organisation routes
 Route.get('/organisation/current', 'OrganisationController.getOrganisationData').middleware('auth')
+Route.post('/organisation', 'OrganisationController.updateOrganisationData').middleware('auth')
