@@ -29,5 +29,7 @@ Route.post('/users', 'UserController.createUser').middleware('auth')
 
 // Organisation routes
 Route.get('/organisation/current', 'OrganisationController.getOrganisationData').middleware('auth')
-Route.get('/organisation/loadingPoints', 'OrganisationController.getLoadingPoints').middleware('auth')
+Route.get('/organisation/loading-points', 'OrganisationController.getLoadingPoints').middleware('auth')
+Route.post('/organisation/loading-points', 'OrganisationController.saveLoadingPoint').middleware('auth')
+Route.delete('/organisation/loading-points/:id', 'OrganisationController.deleteLoadingPoint').middleware('auth')
 Route.post('/organisation', 'OrganisationController.updateOrganisationData').middleware('auth')
