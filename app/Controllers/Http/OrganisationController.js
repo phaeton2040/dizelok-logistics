@@ -40,7 +40,24 @@ class OrganisationController {
             response.send({
                 ok: false,
                 error: e.message
+            });
+        }
+    }
+
+    async getLoadingPoints({ auth, response }) {
+        try {
+            const currentUser = await auth.getUser();
+            const organisation = await currentUser.organisation().fetch(); 
+            response.send({
+                ok: true,
+                loadingPoints: await organisation.loadingPoints().fetch()
             })
+        } catch(e) {
+            response.status(400);
+            response.send({
+                ok: false,
+                error: e.message
+            });
         }
     }
 }

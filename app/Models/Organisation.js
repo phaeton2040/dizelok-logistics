@@ -9,6 +9,9 @@ class Organisation extends Model {
         return this.hasMany('App/Models/User');
     }
 
+    loadingPoints() {
+        return this.hasMany('App/Models/LoadingPoints');
+    }
 }
 
 module.exports = Organisation
