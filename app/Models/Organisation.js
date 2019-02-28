@@ -6,11 +6,11 @@ const Model = use('Model')
 class Organisation extends Model {
 
     users() {
-        return this.hasMany('App/Models/User');
+        return this.hasMany('App/Models/User', 'id', 'organisationId');
     }
 
     loadingPoints() {
-        return this.hasMany('App/Models/LoadingPoints');
+        return this.hasMany('App/Models/LoadingPoints', 'id', 'organisationId');
     }
 }
 

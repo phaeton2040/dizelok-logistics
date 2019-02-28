@@ -10,10 +10,10 @@ class UserController {
 
     async createUser({ request, response }) {
         try {
-            const { username, email, password, firstName, lastName, role, organisation_id } = request.all();
+            const { username, email, password, firstName, lastName, role, organisationId } = request.all();
             const user = new User();
 
-            user.fill({ username, email, password, firstName, lastName, role, organisation_id });
+            user.fill({ username, email, password, firstName, lastName, role, organisationId });
 
             await user.save();
             response.send({ ok: true, user: { ...user.$attributes } });
@@ -49,7 +49,7 @@ class UserController {
             const currentUser = await auth.getUser();
             const { page } = request.get();
             const userSeries = await User.query()
-                                         .where('organisation_id', '=', currentUser.organisation_id).paginate(page, 10);
+                                         .where('organisationId', '=', currentUser.organisationId).paginate(page, 10);
 
             response.send({ ...userSeries.toJSON() });
         } catch (e) {

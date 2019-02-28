@@ -36,7 +36,7 @@ class User extends Model {
   }
 
   organisation () {
-    return this.belongsTo('App/Models/Organisation');
+    return this.belongsTo('App/Models/Organisation', 'organisationId', 'id');
   }
 
   static get hidden () {
