@@ -1,6 +1,9 @@
 'use strict'
 
+/** @type {typeof import('../../Models/Organisation')} */
 const Organisation = use('App/Models/Organisation');
+
+/** @type {typeof import('../../Models/LoadingPoint')} */
 const LoadingPoint = use('App/Models/LoadingPoint');
 
 class OrganisationController {

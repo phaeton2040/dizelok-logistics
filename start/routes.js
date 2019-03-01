@@ -33,3 +33,11 @@ Route.get('/organisation/loading-points', 'OrganisationController.getLoadingPoin
 Route.post('/organisation/loading-points', 'OrganisationController.saveLoadingPoint').middleware('auth')
 Route.delete('/organisation/loading-points/:id', 'OrganisationController.deleteLoadingPoint').middleware('auth')
 Route.post('/organisation', 'OrganisationController.updateOrganisationData').middleware('auth')
+
+
+// Customer routes
+Route.get('/customers/:id', 'CustomerController.getCustomer').middleware('auth')
+Route.post('/customers/:id', 'CustomerController.updateCustomer').middleware('auth')
+Route.delete('/customers/:id', 'CustomerController.deleteCustomer').middleware('auth')
+Route.get('/customers', 'CustomerController.getCustomers').middleware('auth')
+Route.post('/customers', 'CustomerController.createCustomer').middleware('auth')
