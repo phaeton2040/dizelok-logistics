@@ -9,7 +9,7 @@ class Customer extends Model {
     }
 
     deliveryPoints() {
-        return this.hasMany('App/Models/DeliveryPoint', 'id', 'organisationId');
+        return this.hasMany('App/Models/DeliveryPoint', 'id', 'customerId');
     }
 }
 

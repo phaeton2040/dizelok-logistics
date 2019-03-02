@@ -41,3 +41,4 @@ Route.post('/customers/:id', 'CustomerController.updateCustomer').middleware('au
 Route.delete('/customers/:id', 'CustomerController.deleteCustomer').middleware('auth')
 Route.get('/customers', 'CustomerController.getCustomers').middleware('auth')
 Route.post('/customers', 'CustomerController.createCustomer').middleware('auth')
+Route.delete('/customers/delivery-point/:id', 'CustomerController.deleteDeliveryPoint').middleware('auth')

@@ -63,7 +63,7 @@ class UserController {
 
         try {
             response.send(
-                await auth.withRefreshToken().attempt(email, password, true)
+                await auth.attempt(email, password, true)
             );
         } catch (e) {
             response.status(401);
@@ -71,7 +71,7 @@ class UserController {
         }
     }
 
-    async logout( { auth, request, response }) {
+    async logout( { auth, response }) {
         const apiToken = auth.getAuthHeader()
 
         try {
